@@ -31,8 +31,8 @@ def discriminator(inputs):
 
 # Main
 G = generator(Z)
-Loss_G = -tf.reduce_mean(tf.log(discriminator(X)) + tf.log(1 - discriminator(G)))
-Loss_D = -tf.reduce_mean(tf.log(discriminator(G)))
+Loss_D = -tf.reduce_mean(tf.log(discriminator(X)) - tf.log(1 - discriminator(G)))
+Loss_G = -tf.reduce_mean(tf.log(discriminator(G)))
 
 Train_D = tf.train.AdamOptimizer(learning_rate = 0.0001).minimize(loss_D, var_list = [D_Weight1, D_Bias1, D_Weight2, D_Bias2])
 Train_G = tf.train.AdamOptimizer(learning_rate = 0.0001).minimize(loss_G, var_list = [G_Weight1, G_Bias1, G_Weight2, G_Bias2])
